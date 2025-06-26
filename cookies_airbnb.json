@@ -1,0 +1,359 @@
+[
+  {
+    "name": "everest_cookie",
+    "value": "1750553778.EAMzIyMzA5YjI4NzQzMG.UsOqTaAUtnnfheeMp02hXFtr9aI2uWeyLQnjAp4BW3w",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1785113782,
+    "sameSite": "None"
+  },
+  {
+    "name": "ak_bmsc",
+    "value": "852A45A22170C988D5C016211DECB3B7~000000000000000000000000000000~YAAQFNb3vdfAr3yXAQAAz9gilRx+Kb0p/CXh2PQzY1Ot0tlLoKHb6WF47k+swiGC/PsgVWSmvXXFf9KGrW1YwwSxvCX+BW9LaMVuHBb9RmNimsLSW/tXnK8UeUSxzPi7x+V32FZezCVPTkXdJXtQotT4Ty6zO/1Kv/vCLZGr98cfIIlMtn+eVHjxNxcz3LIA6NfrLHmqkWdTLdmsRCnmVU+IdnkZUCEwxzCXk+lIbz+lHWHNbIAtnd/Cykr3JL3XgDUiwr9RFZxpz2LIAKpbYnNfgPMsX8u84BrrfzVfxx7hQzBhYy3s+BqtDN4c3c6fY3Q0Nzgl0KPiS4kSbUQSxCQO+Kf/iXart+NZdznT92s1etwWPB4Gn6FOM+OjfKdN24zLhFec3PZzmQ==",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": false,
+    "httpOnly": false,
+    "expiry": 1750560982,
+    "sameSite": "None"
+  },
+  {
+    "name": "jitney_client_session_id",
+    "value": "f2254b78-35d6-4834-b404-83f63b19156d",
+    "path": "/",
+    "domain": ".www.airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766364983,
+    "sameSite": "None"
+  },
+  {
+    "name": "jitney_client_session_created_at",
+    "value": "1750553783.048",
+    "path": "/",
+    "domain": ".www.airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766364983,
+    "sameSite": "None"
+  },
+  {
+    "name": "frmfctr",
+    "value": "wide",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766364983,
+    "sameSite": "None"
+  },
+  {
+    "name": "cfrmfctr",
+    "value": "DESKTOP",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766364983,
+    "sameSite": "None"
+  },
+  {
+    "name": "cbkp",
+    "value": "3",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766364983,
+    "sameSite": "None"
+  },
+  {
+    "name": "auth_jitney_session_id",
+    "value": "0818ae12-7c7f-41e3-ac02-2db076d9965a",
+    "path": "/",
+    "domain": ".www.airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766365001,
+    "sameSite": "None"
+  },
+  {
+    "name": "FPLC",
+    "value": "FwHP%2Bj%2FN33zcz4OUkigBE6Ly3U8sxuyRTKF%2F%2BsX5L46JaLl7Vmjsof%2FNkf32NT%2FMl3HYY66BABux3PDYK9x34CE4eZGOQXQWq9OYAMocne%2BntNgAv%2BRfFhMvZOH7Pg%3D%3D",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1750625827,
+    "sameSite": "None"
+  },
+  {
+    "name": "hli",
+    "value": "1",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1785114285,
+    "sameSite": "None"
+  },
+  {
+    "name": "_aaj",
+    "value": "23%7C1%7CPXwl9gHYhLrs0C1KfQ23Lxpx8mD5kiVbnXpU1kapfBQ2VLHbaQgGqSb%2Fu9R6z26JJFPFo7nTPx5CEpLY%2FYCJOm%2BhmSLXMrTitJpZJmGqNjqbCfY1ZVS3pRPbvP1PA5kM9kkdJ0tlsEBUfeEB%2Fx%2B2YwNn0Y5MLRVR%2B%2BcUNz%2FqttRygFO14QK%2BV%2BHxhGOfujn%2BuDjqOz0ZD6rmChezUp29%2Bqn%2B9BtOTHg2703CjFkdUbLoR5dzMYe9IkdV1am3t%2FCwiACjtn9V%2BsQiUm7Ddfldzywf73X7Ms4MCLpRjHL3ztQUp1uY%2BE4b%2FDX%2BIH6IiTFamHqsHoEHtFsS64ZETQSVyvG6UnfgKuXtb9fp0TGjGdLJWPN72YCZqodW7P77kZIE%2B1OEzs4zrxtL2udj427pevZmCDU5AcSfqpMqpmbYXZr9Y4UFpE8mrDcj5raNs8%2F2SeRVA57FD3QQ57KKO9Z%2B%2FiEQuTGVlU1OEXQCfq0FQLYdlk14%2F2fy%2Bha%2Fy8H6Lnvk%2BR5ZzBnckt9DezVVOsPAAiBxw3viYQsuN4P%2Fj4Ssd7otH2LAXm5Wac8xrQCHymcDnSOuJUvyDfjiCwgDAxQX4Y0N0vG36FqxzZF8LBjSoja6lqx2m9LzQPq7xX9mBqRqMcwoD3guT54%2Bjp0raZeL4wTfNkFieW9DAah9WGJ%2BDqr4RYyATiJg1%2BmbxYnvi5gh%2FaAQ6r%2FAtQCfD5OdHpEi6sPJkM1QeEDeFZ0gVe2tINj02RRf4dgaMNxfa2sbxbb5n3B2oO0ilqsW8YwmYXIu6%2F3Ep5ewSNMUS4dv4vLTVpmwGkilv6Ko52E%3D",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": true,
+    "expiry": 1785114285,
+    "sameSite": "None"
+  },
+  {
+    "name": "rclmd",
+    "value": "%7B%22697001080%22%3A%22email%22%7D",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1785114285,
+    "sameSite": "None"
+  },
+  {
+    "name": "_aat",
+    "value": "0%7ClU%2Fa5WcF0AoCddJ7t7obyxImsMCP3OkKvFm3dehYzGib4PnjzwZ0ZwXQI26n1fxM",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": true,
+    "expiry": 1785114285,
+    "sameSite": "None"
+  },
+  {
+    "name": "li",
+    "value": "1",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": false,
+    "httpOnly": false,
+    "expiry": 1785114285,
+    "sameSite": "None"
+  },
+  {
+    "name": "rclu",
+    "value": "%7B%22697001080%22%3A%22H%2FBquBqEd%2BaJR061SZJbJEJtRlAsc5xTYUVSPtY9TzU%3D%22%7D",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1785114285,
+    "sameSite": "None"
+  },
+  {
+    "name": "_airbed_session_id",
+    "value": "ada2c93b5643ee6fba12af6069d4dfae",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": true,
+    "expiry": 1785114285,
+    "sameSite": "None"
+  },
+  {
+    "name": "hli",
+    "value": "1",
+    "path": "/",
+    "domain": ".www.airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766365485,
+    "sameSite": "None"
+  },
+  {
+    "name": "_csrf_token",
+    "value": "V4%24.airbnb.mx%240UkLc2pKghk%24EqhxYprAk0MidHBc_5JuPXUqs9Mk9dZeOS1exA-vMVU%3D",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "sameSite": "None"
+  },
+  {
+    "name": "flags",
+    "value": "1179652",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "sameSite": "None"
+  },
+  {
+    "name": "roles",
+    "value": "0",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "sameSite": "None"
+  },
+  {
+    "name": "_gcl_au",
+    "value": "1.1.846464527.1750553784",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": false,
+    "httpOnly": false,
+    "expiry": 1758329784,
+    "sameSite": "None"
+  },
+  {
+    "name": "_ga",
+    "value": "GA1.1.1851036364.1750553784",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": false,
+    "httpOnly": false,
+    "expiry": 1785114291,
+    "sameSite": "None"
+  },
+  {
+    "name": "FPAU",
+    "value": "1.1.846464527.1750553784",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1758329787,
+    "sameSite": "None"
+  },
+  {
+    "name": "FPGSID",
+    "value": "1.1750554287.1750554287.G-2P6Q8PGG16.lqGxah2qNb9eCNw1mRgmDg",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1750556091,
+    "sameSite": "None"
+  },
+  {
+    "name": "_scid",
+    "value": "9629c091-3564-4631-5726-a63008b13c72",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1782090291,
+    "sameSite": "None"
+  },
+  {
+    "name": "_user_attributes",
+    "value": "%7B%22curr%22%3A%22MXN%22%2C%22guest_exchange%22%3A19.17153%2C%22id%22%3A697001080%2C%22id_str%22%3A%22697001080%22%2C%22hash_user_id%22%3A%225c543edaad742c469baf643451ce84820b669996%22%2C%22eid%22%3A%22xPe-kbaCoJFCxHiIPiVVHA%3D%3D%22%2C%22num_h%22%3A0%2C%22name%22%3A%22Norma%22%2C%22num_action%22%3A0%2C%22is_admin%22%3Afalse%2C%22can_access_photography%22%3Afalse%2C%22travel_credit_status%22%3Anull%2C%22referrals_info%22%3A%7B%22receiver_max_savings%22%3Anull%2C%22receiver_savings_percent%22%3Anull%2C%22receiver_signup%22%3Anull%2C%22referrer_guest%22%3A%22%24350%2BMXN%22%2C%22terms_and_conditions_link%22%3A%22%2Fhelp%2Farticle%2F2269%22%2C%22wechat_link%22%3Anull%2C%22offer_discount_type%22%3Anull%7D%7D",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766365539,
+    "sameSite": "None"
+  },
+  {
+    "name": "_pt",
+    "value": "1--WyI1YzU0M2VkYWFkNzQyYzQ2OWJhZjY0MzQ1MWNlODQ4MjBiNjY5OTk2Il0%3D--d7cc16cad7f77de407ff1b93bb8abb04efd4d732",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766279139,
+    "sameSite": "None"
+  },
+  {
+    "name": "_ga_2P6Q8PGG16",
+    "value": "GS2.1.s1750553784$o1$g1$t1750554340$j7$l0$h1965085666",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": false,
+    "httpOnly": false,
+    "expiry": 1785114340,
+    "sameSite": "None"
+  },
+  {
+    "name": "FPID",
+    "value": "FPID2.2.UlTELqvYrxaXUanYfEL%2FGlfe%2B4bzo1Ah7mjK5TAs%2FRo%3D.1750553784",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": true,
+    "expiry": 1785114341,
+    "sameSite": "None"
+  },
+  {
+    "name": "previousTab",
+    "value": "%7B%22id%22%3A%22f678daa2-8bfb-409a-b354-caa8d6fb1474%22%7D",
+    "path": "/",
+    "domain": ".www.airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766365541,
+    "sameSite": "None"
+  },
+  {
+    "name": "tzo",
+    "value": "-360",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766365541,
+    "sameSite": "None"
+  },
+  {
+    "name": "_cci",
+    "value": "cban%3Aac-a3a85f82-7aa0-487a-8b05-85895ef53640",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766365542,
+    "sameSite": "None"
+  },
+  {
+    "name": "_ccv",
+    "value": "cban%3A0_183215%3D1%2C0_200000%3D1%2C0_183345%3D1%2C0_183243%3D1%2C0_183216%3D1%2C0_179751%3D1%2C0_200003%3D1%2C0_200005%3D1%2C0_179754%3D1%2C0_179750%3D1%2C0_179737%3D1%2C0_179744%3D1%2C0_179739%3D1%2C0_179743%3D1%2C0_179749%3D1%2C0_200012%3D1%2C0_200011%3D1%2C0_183217%3D1%2C0_183219%3D1%2C0_183096%3D1%2C0_179747%3D1%2C0_179740%3D1%2C0_179752%3D1%2C0_183241%3D1%2C0_200007%3D1%2C0_183346%3D1%2C0_183095%3D1%2C0_210000%3D1%2C0_210001%3D1%2C0_210002%3D1%2C0_210003%3D1%2C0_210004%3D1%2C0_210010%3D1%2C0_210012%3D1%2C0_210008%3D1%2C0_210016%3D1%2C0_210017%3D1",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766365542,
+    "sameSite": "None"
+  },
+  {
+    "name": "bev",
+    "value": "1750553777_EANDM0ZjhjNzJmNW",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1785114343,
+    "sameSite": "None"
+  },
+  {
+    "name": "jitney_client_session_updated_at",
+    "value": "1750554342.967",
+    "path": "/",
+    "domain": ".www.airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1766365543,
+    "sameSite": "None"
+  },
+  {
+    "name": "bm_sv",
+    "value": "BA18A91165F3CB86150F24CD0CAEDD1F~YAAQF9b3ve9y12aXAQAAqmcrlRySCUbyHneLt6eJUK10oOSdvPVtWYaxvc+w2TbCbVJfnvTDClgu7UgMrjnGbZcg+vmGD4DSrKjYvHLoAnRuysz54sBOKNXnWkm3fvUX6FS0CUtX87QctfRftiuH/XCc/z96K+TgmYclm4lIYhp4KzZGAbNAbZM7EhDLsgm46rLpnZSwh3JycopfT/jX/ZJr8rnoHTEdSq5rGSqQFF7l6DRvHcfLh0LAHQYO21Pb~1",
+    "path": "/",
+    "domain": ".airbnb.mx",
+    "secure": true,
+    "httpOnly": false,
+    "expiry": 1750560983,
+    "sameSite": "None"
+  }
+]
