@@ -76,7 +76,7 @@ dashboard_url = "https://www.airbnb.com/hosting/listings"
 
 log("Abriendo navegador para comprobar sesión y crear anuncio...")
 driver = webdriver.Firefox(service=service, options=options)
-driver.get("https://www.airbnb.com/")
+driver.get("https://www.airbnb.mx/")
 
 # Cargar cookies guardadas
 try:
