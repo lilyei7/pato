@@ -50,8 +50,27 @@ else:  # macOS u otros
 # Configura el path al geckodriver y Firefox
 service = Service(gecko_path)
 options = Options()
-options.headless = True  # Forzar headless SIEMPRE, en cualquier sistema
+options.headless = True
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--disable-gpu')
+options.add_argument('--disable-software-rasterizer')
+options.add_argument('--width=1920')
+options.add_argument('--height=1080')
+options.add_argument('--window-size=1920,1080')
+options.add_argument('--display=:99')  # Use Xvfb display
 options.binary_location = firefox_binary
+
+# Set Firefox preferences
+options.set_preference('browser.download.folderList', 2)
+options.set_preference('browser.download.manager.showWhenStarting', False)
+options.set_preference('browser.download.dir', os.getcwd())
+options.set_preference('browser.helperApps.neverAsk.saveToDisk', 'application/octet-stream')
+
+# Set environment variables
+os.environ['MOZ_HEADLESS'] = '1'
+os.environ['DISPLAY'] = ':99'
 
 dashboard_url = "https://www.airbnb.com/hosting/listings"
 
