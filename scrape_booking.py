@@ -18,18 +18,29 @@ from selenium.webdriver.support import expected_conditions as EC
 # Cambia esta URL por la del hotel que quieras analizar
 target_url = "https://www.booking.com/hotel/es/axor-feria.html?aid=304142&label=gen173nr-1FCAsoRkIKYXhvci1mZXJpYUgzWARooAGIAQGYATG4ARfIAQzYAQHoAQH4AQKIAgGoAgO4AuiE3cIGwAIB0gIkNWFmZTlkZjktZDczMC00ZDg1LWJkNmMtMDY5M2Q5NjljYWVk2AIF4AIB&sid=d28912efa12f2c79be667d7b88d1b288&all_sr_blocks=18912506_231638378_0_2_0_778152&checkin=2025-06-22&checkout=2025-06-23&dest_id=-390625&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&highlighted_blocks=18912506_231638378_0_2_0_778152&hpos=1&matching_block_id=18912506_231638378_0_2_0_778152&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=18912506_231638378_0_2_0_778152_13005&srepoch=1750549121&srpvid=d8bda63b2f2b05ca&type=total&ucfs=1&"
 
-# Configura el path al geckodriver y al ejecutable de Firefox
-service = Service("./geckodriver.exe")
-options = Options()
-# Usa la ruta correcta para Firefox Developer Edition
-options.binary_location = r"C:\Program Files\Firefox Developer Edition\firefox.exe"
-# Optimizaciones para velocidad
-options.add_argument("--headless")  # Ejecutar sin ventana del navegador
-options.set_preference("javascript.enabled", False)  # Deshabilitar JavaScript para mayor velocidad
-options.set_preference("permissions.default.image", 2)  # No cargar imágenes por defecto
+# Configurar geckodriver según el sistema operativo
+import platform
+sistema = platform.system()
+log(f"Sistema operativo detectado: {sistema}")
 
-def log(msg):
-    print(f"[LOG] {msg}")
+if sistema == "Windows":
+    gecko_path = "./geckodriver.exe"
+elif sistema == "Linux":
+    gecko_path = "./geckodriver"  # Sin extensión .exe en Linux
+else:
+    gecko_path = "./geckodriver"  # Para otros sistemas
+
+# Configurar opciones de Firefox
+options = Options()
+options.headless = True
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--disable-gpu')
+
+# Inicializar el driver
+service = Service(gecko_path)
+driver = webdriver.Firefox(service=service, options=options)
 
 # Inicializar el clasificador de imágenes para análisis visual
 log("Inicializando clasificador de imágenes para análisis visual...")
@@ -45,7 +56,6 @@ except Exception as e:
 start_time = time.time()
 log(f"Iniciando scraping a las {time.strftime('%H:%M:%S')}")
 
-driver = webdriver.Firefox(service=service, options=options)
 driver.get(target_url)
 wait = WebDriverWait(driver, 8)  # Reducir timeout
 
