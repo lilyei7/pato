@@ -15,6 +15,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+# Define log function first
+def log(msg):
+    print(f"[LOG] {msg}")
+
 # Cambia esta URL por la del hotel que quieras analizar
 target_url = "https://www.booking.com/hotel/es/axor-feria.html?aid=304142&label=gen173nr-1FCAsoRkIKYXhvci1mZXJpYUgzWARooAGIAQGYATG4ARfIAQzYAQHoAQH4AQKIAgGoAgO4AuiE3cIGwAIB0gIkNWFmZTlkZjktZDczMC00ZDg1LWJkNmMtMDY5M2Q5NjljYWVk2AIF4AIB&sid=d28912efa12f2c79be667d7b88d1b288&all_sr_blocks=18912506_231638378_0_2_0_778152&checkin=2025-06-22&checkout=2025-06-23&dest_id=-390625&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&highlighted_blocks=18912506_231638378_0_2_0_778152&hpos=1&matching_block_id=18912506_231638378_0_2_0_778152&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=18912506_231638378_0_2_0_778152_13005&srepoch=1750549121&srpvid=d8bda63b2f2b05ca&type=total&ucfs=1&"
 
