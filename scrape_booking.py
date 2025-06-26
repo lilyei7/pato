@@ -14,10 +14,327 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# Define log function first
-def log(msg):
-    print(f"[LOG] {msg}")
+def log(message):
+    """Función para logging con timestamp"""
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {message}")
+
+def adaptar_url_mexico(url):
+    """Adapta una URL de Booking para forzar el idioma español de México y la moneda en MXN"""
+    parsed = urlparse(url)
+    query_params = parse_qs(parsed.query)
+    
+    # Forzar idioma español de México
+    if '.es.' not in parsed.path:
+        path_parts = parsed.path.split('.')
+        if len(path_parts) > 1:
+            path_parts.insert(-1, 'es')
+            new_path = '.'.join(path_parts)
+            parsed = parsed._replace(path=new_path)
+    
+    # Forzar moneda a MXN y lenguaje a español de México
+    query_params['selected_currency'] = ['MXN']
+    query_params['lang'] = ['es-mx']
+    
+    # Reconstruir URL
+    new_query = urlencode(query_params, doseq=True)
+    new_url = urlunparse(parsed._replace(query=new_query))
+    return new_url
+
+def scrape_hotel(url):
+    """Realiza el scraping de un hotel específico"""
+    driver = None
+    
+    try:
+        pass  # Add your code here
+    except Exception as e:
+        log(f"Error: {e}")
+    except Exception as e:
+        log(f"Error: {e}")
+        # Configuración del driver
+        options = Options()
+        options.add_argument('-headless')
+        options.set_preference("intl.accept_languages", "es-MX,es")
+        
+        # Usar el geckodriver apropiado según el sistema operativo
+        if os.name == 'nt':  # Windows
+            service = Service('geckodriver.exe')
+        else:  # Linux/Unix
+            service = Service('./geckodriver')
+        
+        # Inicializar el driver
+        driver = webdriver.Firefox(service=service, options=options)
+        driver.implicitly_wait(10)
+        
+        # Cargar la página
+        log(f"Cargando página {url}")
+        driver.get(url)
+        
+        # Esperar a que cargue el contenido principal
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "hp__hotel-name"))
+        )
+        
+        # Extraer datos del hotel aquí
+        log(f"Extrayendo datos de {url}")
+        # TODO: Agregar código de extracción específico
+        return True
+        
+    except Exception as e:
+        log(f"Error en scraping de {url}: {str(e)}")
+        raise
+        
+    finally:
+        if driver:
+            try:
+                driver.quit()
+            except Exception as e:
+                log(f"Error al cerrar el navegador: {str(e)}")
+
+# Lista de URLs de hoteles
+urls = [
+    "https://www.booking.com/hotel/mx/marriott-tuxtla-gutierrez.es.html?aid=898224&label=hotel_details-SiL4Ie%401750958832&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/best-beach-apartments-cancun-plaza.es.html?aid=898224&label=hotel_details-wCPBNL%401750958868&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/gamma-cancun-centro.es.html?aid=898224&label=hotel_details-4P5Jhv%401750958928&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/bali-hai-acapulco.es.html?aid=898224&label=hotel_details-byoY0z%401750958969&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/suites-jazmin-acapulco.es.html?aid=898224&label=hotel_details-zun4v1b%401750958981&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/acapulco-malibu.es.html?aid=898224&label=hotel_details-zvSIh9e%401750958991&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/comfort-inn-puerto-vallarta.es.html?aid=898224&label=hotel_details-01CYkx6%401750959030&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&"
+]
+
+# Procesar URLs para forzar idioma y moneda de México
+urls_mexico = [adaptar_url_mexico(u) for u in urls]
+
+# Ejecutar scraping en paralelo
+if __name__ == "__main__":
+    try:
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            future_to_url = {executor.submit(scrape_hotel, url): url for url in urls_mexico}
+            for future in as_completed(future_to_url):
+                url = future_to_url[future]
+                try:
+                    future.result()
+                    log(f"Scraping completado para: {url}")
+                except Exception as exc:
+                    log(f"Error en scraping de {url}: {exc}")
+    except Exception as e:
+        log(f"Error general: {e}")
+
+# Función para logging con timestamp
+def log(message):
+    """Función para logging con timestamp"""
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {message}")
+
+# Función para adaptar URLs a formato México
+def adaptar_url_mexico(url):
+    """Adapta una URL de Booking para forzar el idioma español de México y la moneda en MXN"""
+    parsed = urlparse(url)
+    query_params = parse_qs(parsed.query)
+    
+    # Forzar idioma español de México
+    if '.es.' not in parsed.path:
+        path_parts = parsed.path.split('.')
+        if len(path_parts) > 1:
+            path_parts.insert(-1, 'es')
+            new_path = '.'.join(path_parts)
+            parsed = parsed._replace(path=new_path)
+    
+    # Forzar moneda a MXN y lenguaje a español de México
+    query_params['selected_currency'] = ['MXN']
+    query_params['lang'] = ['es-mx']
+    
+    # Reconstruir URL
+    new_query = urlencode(query_params, doseq=True)
+    new_url = urlunparse(parsed._replace(query=new_query))
+    return new_url
+
+# Función principal de scraping
+def scrape_hotel(url):
+    """Realiza el scraping de un hotel específico"""
+    driver = None
+    
+    try:
+        # Configuración del driver
+        options = Options()
+        options.add_argument('-headless')
+        options.set_preference("intl.accept_languages", "es-MX,es")
+        
+        # Usar el geckodriver apropiado según el sistema operativo
+        if os.name == 'nt':  # Windows
+            service = Service('geckodriver.exe')
+        else:  # Linux/Unix
+            service = Service('./geckodriver')
+        
+        # Inicializar el driver
+        driver = webdriver.Firefox(service=service, options=options)
+        driver.implicitly_wait(10)
+        
+        # Cargar la página
+        log(f"Cargando página {url}")
+        driver.get(url)
+        
+        # Esperar a que cargue el contenido principal
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "hp__hotel-name"))
+        )
+        
+        # Extraer datos del hotel aquí
+        log(f"Extrayendo datos de {url}")
+        # TODO: Agregar código de extracción específico
+        return True
+        
+    except Exception as e:
+        log(f"Error en scraping de {url}: {str(e)}")
+        raise
+        
+    finally:
+        if driver:
+            try:
+                driver.quit()
+            except Exception as e:
+                log(f"Error al cerrar el navegador: {str(e)}")
+
+def log(message):
+    """Función para logging con timestamp"""
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {message}")
+
+def adaptar_url_mexico(url):
+    """Adapta una URL de Booking para forzar el idioma español de México y la moneda en MXN"""
+    parsed = urlparse(url)
+    query_params = parse_qs(parsed.query)
+    
+    # Forzar idioma español de México
+    if '.es.' not in parsed.path:
+        path_parts = parsed.path.split('.')
+        if len(path_parts) > 1:
+            path_parts.insert(-1, 'es')
+            new_path = '.'.join(path_parts)
+            parsed = parsed._replace(path=new_path)
+    
+    # Forzar moneda a MXN
+    query_params['selected_currency'] = ['MXN']
+    query_params['lang'] = ['es-mx']
+    
+    # Reconstruir URL
+    new_query = urlencode(query_params, doseq=True)
+    new_url = urlunparse(parsed._replace(query=new_query))
+    return new_url
+
+def scrape_hotel(url):
+    """Realiza el scraping de un hotel específico"""
+    driver = None
+    
+    try:
+        # Configuración del driver
+        options = Options()
+        options.add_argument('-headless')
+        options.set_preference("intl.accept_languages", "es-MX,es")
+        
+        # Usar el geckodriver apropiado según el sistema operativo
+        if os.name == 'nt':  # Windows
+            service = Service('geckodriver.exe')
+        else:  # Linux/Unix
+            service = Service('./geckodriver')
+        
+        # Inicializar el driver
+        driver = webdriver.Firefox(service=service, options=options)
+        driver.implicitly_wait(10)
+        
+        # Cargar la página
+        log(f"Cargando página {url}")
+        driver.get(url)
+        
+        # Esperar a que cargue el contenido principal
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "hp__hotel-name"))
+        )
+        
+        # Extraer datos del hotel aquí
+        log(f"Extrayendo datos de {url}")
+        # TODO: Agregar código de extracción específico
+        return True  # Si todo fue exitoso
+        
+    except Exception as e:
+        log(f"Error en scraping de {url}: {str(e)}")
+        raise
+        
+    finally:
+        if driver:
+            try:
+                driver.quit()
+            except Exception as e:
+                log(f"Error al cerrar el navegador: {str(e)}")
+
+def log(message):
+    """Función para logging con timestamp"""
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {message}")
+
+def adaptar_url_mexico(url):
+    """Adapta una URL de Booking para forzar el idioma español de México y la moneda en MXN"""
+    parsed = urlparse(url)
+    query_params = parse_qs(parsed.query)
+    
+    # Forzar idioma español de México
+    if '.es.' not in parsed.path:
+        path_parts = parsed.path.split('.')
+        if len(path_parts) > 1:
+            path_parts.insert(-1, 'es')
+            new_path = '.'.join(path_parts)
+            parsed = parsed._replace(path=new_path)
+    
+    # Forzar moneda a MXN
+    query_params['selected_currency'] = ['MXN']
+    query_params['lang'] = ['es-mx']
+    
+    # Reconstruir URL
+    new_query = urlencode(query_params, doseq=True)
+    new_url = urlunparse(parsed._replace(query=new_query))
+    return new_url
+
+def scrape_hotel(url):
+    """Realiza el scraping de un hotel específico"""
+    driver = None
+    try:
+        # Configuración del driver
+        options = Options()
+        options.add_argument('-headless')
+        options.set_preference("intl.accept_languages", "es-MX,es")
+        
+        # Usar el geckodriver apropiado según el sistema operativo
+        if os.name == 'nt':  # Windows
+            service = Service('geckodriver.exe')
+        else:  # Linux/Unix
+            service = Service('./geckodriver')
+        
+        driver = webdriver.Firefox(service=service, options=options)
+        
+        # Configurar espera implícita
+        driver.implicitly_wait(10)
+        
+        # Cargar la página
+        driver.get(url)
+        
+        # Esperar a que cargue el contenido principal
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "hp__hotel-name"))
+        )
+        
+        # Aquí va todo el código de scraping específico
+        log(f"Scraping completado para: {url}")
+        return True
+    
+    except Exception as e:
+        log(f"Error en scraping de {url}: {str(e)}")
+        raise
+    
+    finally:
+        if driver:
+            try:
+                driver.quit()
+            except Exception as e:
+                log(f"Error al cerrar el navegador: {str(e)}")
 
 # Cambia esta URL por la del hotel que quieras analizar
 target_url = "https://www.booking.com/hotel/es/axor-feria.html?aid=304142&label=gen173nr-1FCAsoRkIKYXhvci1mZXJpYUgzWARooAGIAQGYATG4ARfIAQzYAQHoAQH4AQKIAgGoAgO4AuiE3cIGwAIB0gIkNWFmZTlkZjktZDczMC00ZDg1LWJkNmMtMDY5M2Q5NjljYWVk2AIF4AIB&sid=d28912efa12f2c79be667d7b88d1b288&all_sr_blocks=18912506_231638378_0_2_0_778152&checkin=2025-06-22&checkout=2025-06-23&dest_id=-390625&dest_type=city&dist=0&group_adults=2&group_children=0&hapos=1&highlighted_blocks=18912506_231638378_0_2_0_778152&hpos=1&matching_block_id=18912506_231638378_0_2_0_778152&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=popularity&sr_pri_blocks=18912506_231638378_0_2_0_778152_13005&srepoch=1750549121&srpvid=d8bda63b2f2b05ca&type=total&ucfs=1&"
@@ -318,51 +635,54 @@ def analyze_image_visually(image_data):
         # Buscar palabras clave relacionadas con piscinas en los resultados
         pool_keywords = [
             'swimming pool', 'pool', 'water', 'swimming', 'resort',
-            'lakeside', 'fountain', 'spa', 'hot tub', 'jacuzzi',
-            'poolside', 'swimming hole', 'aquatic', 'bathing'
+            'aquatic', 'lagoon', 'pond', 'poolside'
         ]
         
-        bathroom_keywords = [
-            'bathroom', 'toilet', 'shower', 'bathtub', 'washbasin',
-            'sink', 'mirror', 'bath', 'lavatory', 'restroom'
-        ]
-        
+        # Buscar palabras clave relacionadas con habitaciones
         room_keywords = [
-            'bedroom', 'bed', 'hotel room', 'suite', 'dormitory',
-            'sleeping', 'pillow', 'mattress', 'wardrobe', 'closet'
+            'bedroom', 'bed', 'room', 'interior', 'hotel room', 'suite',
+            'accommodation', 'furniture', 'pillow', 'mattress'
         ]
         
+        # Buscar palabras clave relacionadas con baños
+        bathroom_keywords = [
+            'bathroom', 'toilet', 'shower', 'bathtub', 'sink', 'washroom',
+            'lavatory', 'bath'
+        ]
+        
+        # Buscar palabras clave relacionadas con restaurantes
         restaurant_keywords = [
-            'restaurant', 'dining', 'bar', 'kitchen', 'cafe',
-            'lobby', 'reception', 'buffet', 'food', 'table'
+            'restaurant', 'dining', 'food', 'meal', 'cuisine', 'table',
+            'cafe', 'cafeteria', 'bistro', 'eatery', 'dining room'
         ]
         
+        # Buscar palabras clave relacionadas con exterior
         exterior_keywords = [
-            'building', 'architecture', 'facade', 'exterior',
-            'street', 'balcony', 'terrace', 'garden', 'outdoor'
+            'building', 'exterior', 'architecture', 'facade', 'outdoor',
+            'structure', 'hotel', 'resort'
         ]
         
-        # Analizar los resultados de clasificación
-        for result in results[:3]:  # Revisar top 3 predicciones
+        # Revisar cada predicción
+        for result in results:
             label = result['label'].lower()
             confidence = result['score']
             
-            # Solo considerar predicciones con cierta confianza
-            if confidence > 0.1:
-                # Verificar piscina (prioridad alta)
+            # Solo considerar predicciones con alta confianza
+            if confidence > 0.7:
+                # Verificar piscina
                 if any(keyword in label for keyword in pool_keywords):
                     log(f"Análisis visual detectó: {label} (confianza: {confidence:.2f}) -> PISCINA")
                     return 'piscina'
-                
-                # Verificar baño
-                elif any(keyword in label for keyword in bathroom_keywords):
-                    log(f"Análisis visual detectó: {label} (confianza: {confidence:.2f}) -> BAÑO")
-                    return 'baño'
                 
                 # Verificar habitación
                 elif any(keyword in label for keyword in room_keywords):
                     log(f"Análisis visual detectó: {label} (confianza: {confidence:.2f}) -> HABITACIÓN")
                     return 'habitacion'
+                
+                # Verificar baño
+                elif any(keyword in label for keyword in bathroom_keywords):
+                    log(f"Análisis visual detectó: {label} (confianza: {confidence:.2f}) -> BAÑO")
+                    return 'baño'
                 
                 # Verificar restaurante
                 elif any(keyword in label for keyword in restaurant_keywords):
@@ -820,3 +1140,31 @@ end_time = time.time()
 total_time = end_time - start_time
 log(f'Scraping completado en {total_time:.2f} segundos')
 log(f'Datos guardados en la base de datos SQLite.')
+
+# --- Nuevos hoteles a agregar ---
+urls = [
+    "https://www.booking.com/hotel/mx/marriott-tuxtla-gutierrez.es.html?aid=898224&label=hotel_details-SiL4Ie%401750958832&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/best-beach-apartments-cancun-plaza.es.html?aid=898224&label=hotel_details-wCPBNL%401750958868&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/gamma-cancun-centro.es.html?aid=898224&label=hotel_details-4P5Jhv%401750958928&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/bali-hai-acapulco.es.html?aid=898224&label=hotel_details-byoY0z%401750958969&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/suites-jazmin-acapulco.es.html?aid=898224&label=hotel_details-zun4v1b%401750958981&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/acapulco-malibu.es.html?aid=898224&label=hotel_details-zvSIh9e%401750958991&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&",
+    "https://www.booking.com/hotel/mx/comfort-inn-puerto-vallarta.es.html?aid=898224&label=hotel_details-01CYkx6%401750959030&sid=5b9c306f41e272986795b20d3b755e79&checkin=2025-06-26&checkout=2025-06-27&dist=0&from_sn=ios&group_adults=2&group_children=0&keep_landing=1&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA%2C&sb_price_type=total&type=total&"
+]
+
+urls_mexico = [adaptar_url_mexico(u) for u in urls]
+
+# Ejecutar scraping en paralelo
+if __name__ == "__main__":
+    try:
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            future_to_url = {executor.submit(scrape_hotel, url): url for url in urls_mexico}
+            for future in as_completed(future_to_url):
+                url = future_to_url[future]
+                try:
+                    future.result()
+                    log(f"Scraping completado para: {url}")
+                except Exception as exc:
+                    log(f"Error en scraping de {url}: {exc}")
+    except Exception as e:
+        log(f"Error general: {e}")
