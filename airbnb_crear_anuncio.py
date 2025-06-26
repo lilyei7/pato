@@ -12,11 +12,46 @@ from selenium.common.exceptions import ElementClickInterceptedException, WebDriv
 def log(msg):
     print(f"[LOG] {msg}")
 
+# Configurar rutas según el sistema operativo
+import platform
+import os
+
+# Determinar el sistema operativo
+sistema = platform.system()
+log(f"Sistema operativo detectado: {sistema}")
+
+# Configurar geckodriver y Firefox según el sistema
+if sistema == "Windows":
+    gecko_path = "./geckodriver.exe"
+    firefox_binary = r"C:\Program Files\Firefox Developer Edition\firefox.exe"
+elif sistema == "Linux":
+    gecko_path = "./geckodriver"
+    # En Linux, Firefox puede estar en diferentes ubicaciones
+    posibles_rutas = [
+        "/usr/bin/firefox",
+        "/usr/lib/firefox/firefox",
+        "/usr/lib/firefox-developer-edition/firefox",
+        "/opt/firefox/firefox",
+        "/opt/firefox-developer-edition/firefox"
+    ]
+    firefox_binary = None
+    for ruta in posibles_rutas:
+        if os.path.exists(ruta):
+            firefox_binary = ruta
+            log(f"Firefox encontrado en: {ruta}")
+            break
+    if not firefox_binary:
+        firefox_binary = "/usr/bin/firefox"  # Default fallback
+        log("No se encontró Firefox en rutas comunes. Usando ruta predeterminada.")
+else:  # macOS u otros
+    gecko_path = "./geckodriver"
+    firefox_binary = "/Applications/Firefox Developer Edition.app/Contents/MacOS/firefox"
+
 # Configura el path al geckodriver y Firefox
-service = Service("./geckodriver.exe")
+service = Service(gecko_path)
 options = Options()
-options.headless = False  # Para ver el resultado visualmente
-options.binary_location = r"C:\Program Files\Firefox Developer Edition\firefox.exe"
+options.headless = True  # Forzar headless SIEMPRE, en cualquier sistema
+options.binary_location = firefox_binary
 
 dashboard_url = "https://www.airbnb.com/hosting/listings"
 
